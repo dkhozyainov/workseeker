@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workseeker.bot — Telegram-бот для IT-вакансий</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0B1020;
+            --bg-gradient-center: #1B255A;
+            --bg-card: #16203A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A1A1AA;
+            --text-muted: #6B7280;
+            --cta-orange: #F97316;
+            --cta-orange-light: #FB923C;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            background-image: radial-gradient(ellipse at center, var(--bg-gradient-center) 0%, var(--bg-gradient-center) 20%, var(--bg-primary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            height: 80px;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 120px 80px;
+            gap: 80px;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .text-block {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .h1 {
+            font-size: 56px;
+            line-height: 64px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .subheadline {
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 72px;
+            padding: 0 28px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--cta-orange) 0%, var(--cta-orange-light) 100%);
+            color: var(--bg-primary);
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 24px rgba(249, 115, 22, 0.35);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(249, 115, 22, 0.45);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .micro-trust {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Visual block */
+        .visual-block {
+            width: 100%;
+            max-width: 520px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 380px;
+        }
+
+        .bot-illustration {
+            width: 260px;
+            height: 260px;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 24px 48px rgba(27, 37, 90, 0.5));
+        }
+
+        .bot-illustration svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.25));
+        }
+
+        .vacancy-cards {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .vacancy-card {
+            position: absolute;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 240px;
+        }
+
+        .vacancy-card:nth-child(1) {
+            top: 10%;
+            right: 0;
+            transform: rotate(-6deg);
+        }
+
+        .vacancy-card:nth-child(2) {
+            bottom: 15%;
+            right: 15%;
+            transform: rotate(4deg);
+        }
+
+        .vacancy-card:nth-child(3) {
+            bottom: 5%;
+            left: 5%;
+            transform: rotate(-3deg);
+        }
+
+        .vacancy-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .vacancy-card-salary {
+            font-size: 13px;
+            color: var(--cta-orange-light);
+            margin-bottom: 4px;
+        }
+
+        .vacancy-card-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer-hint {
+            text-align: center;
+            padding: 16px;
+            font-size: 12px;
+            color: var(--text-primary);
+            opacity: 0.4;
+        }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            .content {
+                flex-direction: column;
+                padding: 24px 24px 100px;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .text-block {
+                align-items: center;
+            }
+
+            .h1 {
+                font-size: 36px;
+                line-height: 42px;
+            }
+
+            .subheadline {
+                font-size: 18px;
+            }
+
+            .visual-block {
+                min-height: 320px;
+            }
+
+            .bot-illustration {
+                width: 200px;
+                height: 200px;
+            }
+
+            .vacancy-card {
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 20px;
+                height: 64px;
+            }
+
+            .content {
+                padding: 20px 20px 88px;
+                gap: 32px;
+            }
+
+            .h1 {
+                font-size: 28px;
+                line-height: 34px;
+            }
+
+            .subheadline {
+                font-size: 16px;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 100%;
+                height: 64px;
+                font-size: 16px;
+            }
+
+            .cta-wrap {
+                position: relative;
+                width: 100%;
+            }
+
+            .cta-spacer {
+                display: none;
+                height: 64px;
+                height: calc(64px + env(safe-area-inset-bottom, 0));
+            }
+
+            .cta-button-sticky {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 64px;
+                border-radius: 0;
+                padding-bottom: env(safe-area-inset-bottom, 0);
+                z-index: 100;
+            }
+
+            .cta-button-sticky + .cta-spacer {
+                display: block;
+            }
+
+            .visual-block {
+                min-height: 240px;
+            }
+
+            .bot-illustration {
+                width: 160px;
+                height: 160px;
+            }
+
+            .vacancy-cards {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a class="logo" href="/">workseeeker.bot</a>
+    </header>
+
+    <main class="content">
+        <section class="text-block">
+            <h1 class="h1">Telegram-бот,<br>который сам<br>находит IT-вакансии</h1>
+            <p class="subheadline">Go · Python · Frontend · QA · DevOps · ML</p>
+            <div class="cta-wrap">
+                <a id="cta-main" class="cta-button" href="https://t.me/WorkSeeekerBot" target="_blank" rel="noopener">🔥 Подписаться и получать вакансии</a>
+                <div class="cta-spacer" aria-hidden="true"></div>
+            </div>
+            <p class="micro-trust">Бесплатно · Без регистрации · Можно отключить в любой момент</p>
+        </section>
+
+        <section class="visual-block">
+            <div class="bot-illustration" aria-hidden="true">
+                <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="botBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3B82F6"/>
+                            <stop offset="100%" style="stop-color:#1D4ED8"/>
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="8" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <circle cx="130" cy="130" r="100" fill="url(#botBody)" filter="url(#glow)" opacity="0.9"/>
+                    <circle cx="130" cy="110" r="28" fill="#0B1020"/>
+                    <circle cx="122" cy="105" r="6" fill="#FFFFFF"/>
+                    <circle cx="138" cy="105" r="6" fill="#FFFFFF"/>
+                    <rect x="95" y="155" width="70" height="12" rx="6" fill="#0B1020"/>
+                    <path d="M100 145 L130 165 L160 145" stroke="#0B1020" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <circle cx="130" cy="195" r="18" fill="#0B1020"/>
+                    <path d="M115 195 L130 210 L145 195" stroke="#F97316" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+            <div class="vacancy-cards">
+                <div class="vacancy-card">
+                    <div class="vacancy-card-title">Go Backend Developer</div>
+                    <div class="vacancy-card-salary">$4 500 — 6 000</div>
+                    <div class="vacancy-card-meta">Remote · Kafka · PostgreSQL</div>
+                </div>
+                <div class="vacancy-card">
+                    <div class="vacancy-card-title">Python Developer</div>
+                    <div class="vacancy-card-salary">$3 000 — 5 000</div>
+                    <div class="vacancy-card-meta">Hybrid · Django · Redis</div>
+                </div>
+                <div class="vacancy-card">
+                    <div class="vacancy-card-title">Frontend Engineer</div>
+                    <div class="vacancy-card-salary">$4 000 — 5 500</div>
+                    <div class="vacancy-card-meta">Remote · React · TypeScript</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-hint">Работает прямо в Telegram</footer>
+
+    <script>
+        (function() {
+            var mq = window.matchMedia('(max-width: 480px)');
+            var cta = document.getElementById('cta-main');
+            function updateSticky() {
+                if (!cta) return;
+                if (mq.matches) {
+                    cta.classList.add('cta-button-sticky');
+                } else {
+                    cta.classList.remove('cta-button-sticky');
+                }
+            }
+            if (mq.addListener) mq.addListener(updateSticky);
+            if (mq.addEventListener) mq.addEventListener('change', updateSticky);
+            updateSticky();
+        })();
+    </script>
+</body>
+</html>
