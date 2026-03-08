@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkSeeker — Закрытый канал IT-вакансий в Telegram</title>
+    <title>WorkSeeker — Свежие IT-вакансии в Telegram</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -111,7 +111,29 @@
         }
         .btn-secondary:hover { border-color: var(--text-primary); color: var(--text-primary); }
 
-        /* —— WHY CLOSED —— */
+        /* —— ПРИМЕР ВАКАНСИЙ —— */
+        .vacancy-examples { padding: 60px 24px 80px; }
+        .vacancy-examples h2 {
+            font-size: 32px; font-weight: 700; text-align: center;
+            margin-bottom: 32px;
+        }
+        .vacancy-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .vacancy-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .vacancy-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .vacancy-salary { color: var(--cta-orange); font-weight: 600; font-size: 17px; margin-bottom: 4px; }
+        .vacancy-location { color: var(--text-secondary); font-size: 14px; }
+        .vacancy-examples .btn-primary { display: block; text-align: center; max-width: 360px; margin: 0 auto; }
+
+        /* —— WHY CLOSED (legacy, unused) —— */
         .why-closed { padding: 60px 24px 40px; }
         .why-closed h2 {
             font-size: 28px; font-weight: 700; text-align: center;
@@ -258,6 +280,10 @@
             text-align: center; color: var(--text-secondary);
             font-size: 17px; line-height: 1.6; max-width: 480px; margin: 0 auto;
         }
+        .social-proof-stats {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 24px 48px;
+            margin-top: 24px; color: var(--text-secondary); font-size: 16px;
+        }
 
         /* —— USE CASES —— */
         .use-cases {
@@ -346,122 +372,117 @@
 
 <!-- HERO -->
 <section class="hero">
-    <h1>🔒 Закрытый Telegram-канал с IT-вакансиями без мусора</h1>
-    <p class="subheadline">Внутри — только свежие IT-вакансии и удобный бот для фильтрации. Без рекрутингового спама. Без общих чатов. Без лишнего шума.</p>
-    <a class="btn-primary" href="https://t.me/+N5keSkqyMDI3OTQy" target="_blank" rel="noopener">🔒 Подать заявку на доступ</a>
-    <p class="hero-cta-hint">Доступ открывается после вступления в закрытый канал</p>
+    <h1>Свежие IT-вакансии прямо в Telegram</h1>
+    <p class="subheadline">Бот собирает вакансии из 200+ источников и присылает только релевантные по вашему стеку.</p>
+    <a class="btn-primary" href="https://t.me/workseeekerbot?start=landing" target="_blank" rel="noopener">🚀 Открыть Telegram-бота</a>
+    <p class="hero-cta-hint">Без регистрации • Бесплатно • 1 минута настройки</p>
 </section>
 
-<!-- ПОЧЕМУ КАНАЛ ЗАКРЫТЫЙ -->
-<section class="why-closed">
+<!-- ПРИМЕР ВАКАНСИЙ -->
+<section class="vacancy-examples">
     <div class="section">
-        <h2>Почему доступ по заявке?</h2>
-        <p class="why-closed-intro">Мы сделали канал закрытым, чтобы:</p>
-        <ul class="why-closed-list">
-            <li>избежать спама и случайной аудитории</li>
-            <li>публиковать только IT-вакансии</li>
-            <li>сохранить качество предложений</li>
-            <li>дать работодателям возможность размещать вакансии напрямую</li>
-        </ul>
-        <p class="why-closed-scarcity">Сейчас внутри менее 100 участников — принимаем новых постепенно.</p>
+        <h2>Примеры вакансий, которые присылает бот</h2>
+        <div class="vacancy-cards">
+            <div class="vacancy-card">
+                <h3>Senior Java Developer</h3>
+                <p class="vacancy-salary">$5000–6500</p>
+                <p class="vacancy-location">Remote</p>
+            </div>
+            <div class="vacancy-card">
+                <h3>Backend Go Engineer</h3>
+                <p class="vacancy-salary">$4500</p>
+                <p class="vacancy-location">Remote EU</p>
+            </div>
+            <div class="vacancy-card">
+                <h3>Python Developer</h3>
+                <p class="vacancy-salary">$4000</p>
+                <p class="vacancy-location">Remote</p>
+            </div>
+        </div>
+        <a class="btn-primary" href="https://t.me/workseeekerbot?start=landing" target="_blank" rel="noopener">Получать такие вакансии → Открыть бот</a>
     </div>
 </section>
 
-<!-- ЧТО ВНУТРИ КАНАЛА -->
-<section class="features">
-    <div class="section">
-        <h2>Что вы получите внутри</h2>
-        <ul class="inside-list">
-            <li>✔ Только IT-вакансии (Java, Python, Go, QA, Data и др.)</li>
-            <li>✔ Удалёнка и офис — по вашему выбору</li>
-            <li>✔ Фильтрация через удобного Telegram-бота</li>
-            <li>✔ Новые вакансии ежедневно</li>
-            <li>✔ Возможность сохранить в избранное</li>
-            <li>✔ Быстрый переход к отклику</li>
-        </ul>
-    </div>
-</section>
-
-<!-- HOW IT WORKS -->
+<!-- КАК РАБОТАЕТ -->
 <section class="steps" id="how-it-works">
     <div class="section">
-        <h2>Как получить доступ</h2>
+        <h2>Как работает</h2>
         <div class="step-list step-list-simple">
             <div class="step">
                 <div class="step-num">1</div>
-                <div><h3>1️⃣ Нажмите «Подать заявку»</h3></div>
+                <div><h3>Откройте Telegram-бота</h3></div>
             </div>
             <div class="step">
                 <div class="step-num">2</div>
-                <div><h3>2️⃣ Вступите в закрытый Telegram-канал</h3></div>
+                <div><h3>Выберите стек (Java, Go, Python и др.)</h3></div>
             </div>
             <div class="step">
                 <div class="step-num">3</div>
-                <div><h3>3️⃣ Получите доступ к вакансиям и боту внутри</h3></div>
+                <div><h3>Получайте новые вакансии автоматически</h3></div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- ЧТО ДЕЛАЕТ БОТ -->
+<section class="features">
+    <div class="section">
+        <h2>Что делает бот</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>1</h3>
+                <p>Собирает вакансии из 200+ источников</p>
+            </div>
+            <div class="feature-card">
+                <h3>2</h3>
+                <p>Фильтрует по стеку (Java, Go, Python и др.)</p>
+            </div>
+            <div class="feature-card">
+                <h3>3</h3>
+                <p>Удаляет дубликаты и спам</p>
+            </div>
+            <div class="feature-card">
+                <h3>4</h3>
+                <p>Отправляет только новые вакансии</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- КОМУ ПОДОЙДЁТ -->
+<section class="use-cases">
+    <div class="section">
+        <h2>Кому подойдёт</h2>
+        <ul class="use-cases-list">
+            <li>Backend разработчикам</li>
+            <li>Frontend разработчикам</li>
+            <li>QA инженерам</li>
+            <li>Data специалистам</li>
+            <li>Тем кто ищет remote работу</li>
+        </ul>
     </div>
 </section>
 
 <!-- СОЦДОКАЗАТЕЛЬСТВО -->
 <section class="social-proof">
     <div class="section">
-        <h2>Почему участникам удобно</h2>
-        <ul class="social-proof-list">
-            <li>Вакансии без HR-шума</li>
-            <li>Никаких общих чатов и флуда</li>
-            <li>Всё управление через Telegram</li>
-            <li>Не нужно мониторить десятки каналов</li>
-        </ul>
-        <p class="social-proof-closer">Вы получаете только то, что действительно подходит.</p>
+        <h2>Бот уже помогает разработчикам находить новые вакансии быстрее.</h2>
+        <div class="social-proof-stats">
+            <span>200+ источников вакансий</span>
+            <span>50+ новых вакансий каждый день</span>
+        </div>
     </div>
 </section>
 
-<!-- USE CASES -->
-<section class="use-cases">
-    <div class="section">
-        <h2>Кому подойдёт</h2>
-        <ul class="use-cases-list">
-            <li>👨‍💻 Backend и Frontend разработчикам</li>
-            <li>🧪 QA-инженерам</li>
-            <li>📊 Аналитикам и Data-специалистам</li>
-            <li>🌍 Тем, кто ищет удалённую работу</li>
-            <li>🚀 Тем, кто хочет видеть только релевантные вакансии</li>
-        </ul>
-    </div>
-</section>
-
-<!-- CTA -->
+<!-- ФИНАЛЬНЫЙ CTA -->
 <section class="cta-block">
     <div class="section">
-        <h2>Получите доступ к IT-вакансиям без лишнего шума</h2>
-        <p class="subheadline">Закрытый формат позволяет сохранить качество и релевантность вакансий.</p>
-        <a class="btn-primary" href="https://t.me/+N5keSkqyMDI3OTQy" target="_blank" rel="noopener">🔒 Получить доступ в закрытый канал</a>
+        <h2>Получайте свежие IT-вакансии в Telegram</h2>
+        <a class="btn-primary" href="https://t.me/workseeekerbot?start=landing" target="_blank" rel="noopener">🚀 Открыть Telegram-бота</a>
     </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq">
-    <div class="section">
-        <h2>Частые вопросы</h2>
-        <dl class="faq-list">
-            <div class="faq-item">
-                <dt>Как получить доступ?</dt>
-                <dd>Нажмите кнопку «Подать заявку» — вы перейдёте в Telegram. Доступ открывается после вступления в канал.</dd>
-            </div>
-            <div class="faq-item">
-                <dt>Нужно ли регистрироваться?</dt>
-                <dd>Нет, достаточно Telegram.</dd>
-            </div>
-            <div class="faq-item">
-                <dt>Платно ли это?</dt>
-                <dd>Базовый доступ бесплатен.</dd>
-            </div>
-        </dl>
-    </div>
-</section>
-
-<footer class="footer-hint">WorkSeeker · Закрытый канал IT-вакансий в Telegram</footer>
+<footer class="footer-hint">WorkSeeker · Бот IT-вакансий в Telegram</footer>
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
